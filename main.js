@@ -230,7 +230,7 @@ function renderMedals(snapshot) {
     extendButton.addEventListener("click", async () => {
       const newExpireDate = extendExpireDate(data.expireDate.toDate(), data.extensionDays || 30);
       const newDateStr = formatDate(newExpireDate.toDate());
-      const confirmed = await showConfirmModal("貸出期限の延長", `${newDateStr} に延長します。\nよろしいですか？`);
+      const confirmed = await showConfirmModal("貸出期限の延長", `${data.title}\n${newDateStr} に延長します。\nよろしいですか？`);
       if (!confirmed) return;
 
       try {
