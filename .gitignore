@@ -16,3 +16,11 @@ _site/
 # counterproductive to check this file into the repository.
 # Details at https://github.com/github/pages-gem/issues/768
 Gemfile.lock
+
+# IDE
+.vscode/
+.idea/
+*.sublime-workspace
+
+# Firebase config (in production, use environment variables)
+firestore.rules

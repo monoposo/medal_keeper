@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>メダルキーパー</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#2196f3">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+</head>
+<body>
+  <header class="header">
+    <div>
+      <h1>メダルキーパー</h1>
+      <p class="subtitle">メダル預け期限管理アプリ</p>
+    </div>
+    <div class="auth-controls">
+      <button id="loginButton" class="button secondary">Googleでログイン</button>
+      <button id="logoutButton" class="button secondary hidden">ログアウト</button>
+    </div>
+  </header>
+  <div class="page-notice">
+    <p id="statusMessage" class="status-message">Googleログインして、メダルの期限管理を始めましょう。</p>
+  </div>
+
+  <main class="container">
+    <section class="panel user-panel hidden" id="userPanel">
+      <div class="user-info">
+        <span id="userName"></span>
+        <span id="userEmail"></span>
+      </div>
+    </section>
+
+    <section class="panel form-panel" id="formPanel">
+      <button id="toggleFormButton" class="button primary">新規登録</button>
+    </section>
+
+    <section class="panel list-panel">
+      <div class="panel-header">
+        <h2>登録済みメダル一覧</h2>
+        <span class="status-note">期限が近い順に表示</span>
+      </div>
+      <div id="medalList" class="list"></div>
+      <p id="emptyState" class="empty-state">ログインするとメダル一覧を表示します。</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>GitHub Pages + Firebase でホスティングできます。</p>
+  </footer>
+
+  <!-- 登録・編集フォームモーダル -->
+  <div id="formModal" class="modal-overlay hidden">
+    <div class="modal form-modal">
+      <div class="modal-header">
+        <h3 id="formModalTitle">メダル登録 / 編集</h3>
+      </div>
+      <form id="medalForm">
+        <div class="form-row">
+          <label for="title">店舗名 / タイトル</label>
+          <input id="title" type="text" required placeholder="例: A店" />
+        </div>
+        <div class="form-row small-row">
+          <div>
+            <label for="amount">枚数</label>
+            <input id="amount" type="number" min="1" required placeholder="0" />
+          </div>
+          <div>
+            <label for="extensionDays">延長日数</label>
+            <input id="extensionDays" type="number" min="1" required placeholder="30" />
+          </div>
+          <div>
+            <label for="expireDate">期限日</label>
+            <input id="expireDate" type="date" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <label for="memo">メモ（任意）</label>
+          <textarea id="memo" rows="3" placeholder="例: 受け取り期限に注意"></textarea>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="button primary" id="submitButton">登録する</button>
+          <button type="button" class="button secondary hidden" id="cancelEditButton">キャンセル</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 確認モーダル -->
+  <div id="confirmModal" class="modal-overlay hidden">
+    <div class="modal">
+      <h3 id="modalTitle">確認</h3>
+      <p id="modalMessage">本当に実行しますか？</p>
+      <div class="modal-actions">
+        <button id="modalCancel" class="button secondary">キャンセル</button>
+        <button id="modalConfirm" class="button primary">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="main.js"></script>
+  <script is:inline>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/sw.js")
+      .then(() => console.log("SW登録OK"));
+    }
+  </script>
+</body>
+</html>
