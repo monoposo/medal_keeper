@@ -153,24 +153,13 @@ function clearForm() {
   extensionDaysInput.value = "30";
   editingId = null;
   submitButton.textContent = "登録する";
-  formTitle.textContent = "メダル登録 / 編集";
-  formModalTitle.textContent = "メダル登録 / 編集";
-  cancelEditButton.classList.add("hidden");
-  if (formModal && formPanel) {
-    formModal.classList.add("hidden");
-    formPanel.classList.remove("collapsed");
-  }
+  formModalTitle.textContent = "メダル登録";
 }
 
 function showForm(open = true) {
   if (!formModal || !formPanel) return;
   formModal.classList.toggle("hidden", !open);
-  formPanel.classList.toggle("collapsed", !open);
-  if (open) {
-    cancelEditButton.classList.remove("hidden");
-  } else {
-    cancelEditButton.classList.add("hidden");
-  }
+  cancelEditButton.classList.remove("hidden");
 }
 
 function extendExpireDate(currentExpireDate, extensionDays) {
@@ -233,11 +222,9 @@ function renderMedals(snapshot) {
       expireDateInput.value = formatDateForInput(data.expireDate.toDate());
       memoInput.value = data.memo || "";
       submitButton.textContent = "更新する";
-      formTitle.textContent = "メダル更新";
       formModalTitle.textContent = "メダル更新";
       cancelEditButton.classList.remove("hidden");
       showForm(true);
-      window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
     extendButton.addEventListener("click", async () => {
@@ -300,6 +287,7 @@ logoutButton.addEventListener("click", async () => {
 
 cancelEditButton.addEventListener("click", () => {
   clearForm();
+  showForm(false);
 });
 
 medalForm.addEventListener("submit", async (event) => {
