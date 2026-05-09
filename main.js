@@ -166,7 +166,7 @@ function extendExpireDate(currentExpireDate, extensionDays) {
   const today = new Date();
   today.setHours(0, 0, 0, 0); // 今日の0時
   const newDate = new Date(today);
-  newDate.setDate(newDate.getDate() + extensionDays);
+  newDate.setDate(newDate.getDate() + extensionDays + 1);
   return Timestamp.fromDate(newDate);
 }
 
@@ -338,6 +338,7 @@ medalForm.addEventListener("submit", async (event) => {
       medalForm.reset();
       setDateDefault();
     }
+    showForm(false);
   } catch (error) {
     console.error("Save error:", error);
     alert("保存に失敗しました。もう一度お試しください。");
