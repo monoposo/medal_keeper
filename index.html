@@ -7,8 +7,8 @@
   <link rel="stylesheet" href="styles.css" />
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#2196f3">
-  <link rel="icon" href="/favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="icon" href="./favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png">
 </head>
 <body>
   <header class="header">
@@ -101,9 +101,9 @@
   </div>
 
   <script type="module" src="main.js"></script>
-  <script is:inline>
+  <script>
     if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("/sw.js")
+      navigator.serviceWorker.register("./sw.js")
       .then(() => console.log("SW登録OK"));
     }
   </script>
